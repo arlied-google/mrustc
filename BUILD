@@ -27,22 +27,21 @@ GCC_COPTS = [
         "-Wno-misleading-indentation",
 ]
 
+# These options are specific to clang++. g++ will report a warning,
+# but will otherwise ignore them.
 CLANG_COPTS = [
-        # These options are specific to clang++. g++ will report a warning,
-        # but will otherwise ignore them.
-        "-Wno-c++98-c++11-compat",
+        # Clang detects many cases where std::move() prevents RVO / elision.
         "-Wno-pessimizing-move",
         "-Wno-unused-private-field",
+        "-Wno-string-conversion",
 ]
 
 COPTS = [
+        "-Werror",
         "-fexceptions",
         "-std=c++14",
         "-fsized-deallocation",
-        "-Wno-string-conversion",
         "-Wno-implicit-fallthrough",
-        "-Wno-return-type",
-        "-Wno-unused-variable",
 ] + CLANG_COPTS
 
 # Note: The order of includes is significant.  Do not reorder.
